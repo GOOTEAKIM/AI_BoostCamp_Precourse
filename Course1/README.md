@@ -295,3 +295,68 @@
 - 다양한 Data Type이 하나의 list에 들어간다
   - 리스트에 문자열, 숫자, 리스트 상관없이 넣을 수 있다
 
+## Day 7 : Function and Console I/O
+
+### function 
+
+- 어떤 일을 수행하는 코드의 덩어리
+- 반복적인 수행을 1회만 작성 후 호출
+- 코드를 논리적인 단위로 분리
+- 캡슐화 : 인터페이스만 알면 타인의 코드 사용
+
+- 함수 수행 순서
+
+  - 함수 부분을 제외한 메인프로그램부터 시작
+  - 함수 호출 시 함수 부분 수행 후 되돌아옴
+
+- parameter : 함수 입력 값 인터페이스
+
+  ```python
+  def f(x) :
+      return 2 * x + 7
+  ```
+
+- argument : 실제 parameter에 대입된 값
+
+  ```python
+  print(f(2)) 
+
+  # 11
+  ```
+
+- 합수 형태
+  - parameter 유무, 반환 값에 따라 함수의 형태가 다름
+
+    | | parameter 없음 | parameter 존재 |
+    | - | - | - |
+    | 반환 값 없음 | 함수 내의 수행문만 수행 | parameter를 사용, 수행문만 수행 |
+    | 반환 값 존재 | parameter없이, 수행문 수행 후 결과값 반환 | parameter를 사용하여 수행문 수행 후 결과값 반환 |
+
+### Console I/O
+
+- input() : 콘솔창에서 문자열을 입력 받는 함수
+- print() : , 사용할 경우 print 문이 연결됨
+
+#### print formatting
+
+1) %string
+2) format 함수
+3) fstring
+
+- old-school formatting
+  - 일반적으로 %-format와 str.format() 함수를 사용한다
+
+- %-format
+  - "%datatype" % (varaible) 형태로 출력 양식을 표현
+
+- fstring
+  - python 3.6 이후, PEP498에 근거한 formatting 기법
+    ```python
+    name = "gootea"
+
+    age = 99
+
+    print(f"Hello, {name}. You are {age}")
+    # Hello, gootea. You are 99
+    ```
+
