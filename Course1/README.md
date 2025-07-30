@@ -87,3 +87,51 @@
 
 - **동적 타이핑 언어** : 프로그램이 **실행하는 시점에 프로그램**이 사용해야할 **데이터에 대한 타입을 결정** 
 
+## Day 2 : 개발환경
+
+- 프로그램을 작성하고, 실행시키는 환경
+- 일반적으로 **코딩 환경** 이라고 부름
+- 개발환경을 결정
+
+1) OS
+2) Python Interpreter
+3) 코드 편집기 (Editor)
+
+### OS
+
+- 선호하는 운영체제를 선정
+
+- Windows 
+  - 친숙함, 초기엔 쉬움
+  - 모듈 설치 어려움, 참고 문서 부족
+
+- Linux
+  - 모듈 설치 쉬움
+  - 무료, 참고문서 많음
+  - OS 자체 사용이 어려움
+
+- MacOS
+  - 모듈 설치 쉬움
+  - 참고문서도 많음
+  - 비쌈
+
+### Python Interpreter
+
+- 2.7과 3.x 버전이 존재 : 현재는 3.x 기준으로 모든 시스템이 작동됨
+- 기존 라이브러리 사용 여부에 따라 버전을 선택
+
+### 코드 편집기
+
+- text 타입의 문서를 ㅈ장하는 모든 편집기 사용가능
+  - 메모장
+  - VI editor
+  - Sublime Text
+  - Atom
+  - VS Code
+  - PyCharm
+
+- **Type 1 - Python**
+  - Anaconda + VS Code
+
+- **Type 2- Data analysis + Deep learning**
+  - Jupyter + colab
