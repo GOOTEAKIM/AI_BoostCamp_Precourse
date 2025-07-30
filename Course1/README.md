@@ -162,3 +162,47 @@
   python --version
   ```
 
+## Day 5 : Jupyter Notebook, Colab
+
+### Jupyter Notebook
+
+- IPython 커널을 기반으로 한 대화형 python shell
+- 일반적인 terminal shell + 웹 기반 데이터 분석 Notebook 제공
+- 미디어, 텍스트, 코드, 수식 등을 하나의 문서로 표현 가능
+- 사실상의 데이터 분석 Interactive Shell의 표준
+
+- (base) PS C:\Users\user> cd workspace 에서 jupyter notebook를 실행한다
+
+  ```bash
+  conda activate base
+
+  cd workspace
+
+  jupyter notebook 
+  ```
+
+- 단축키
+
+  | 기능 | 단축키 |
+  | - | - |
+  | 실행 | `Ctrl + Enter`, `Shift + Enter`, `Alt + Enter` |
+  | 툴팁 표시 | `Shift + Tab` |
+  | 들여쓰기 | `Ctrl + ]` or `Ctrl + [` |
+  | 셀 나누기 | `Ctrl + Shift + -` |
+  | 아래 셀이랑 합치기 | `Shift + M` |
+  | 셀 오려두기 | `X` |
+  | 셀 복사 | `C` |
+  | 셀 붙여넣기 | `V` or `Shift + V` |
+  | 셀 지우기 | `DD` |
+  | 셀 지우기 취소 | `Z` |
+  | Markdown 변환 | `MM` |
+  | Code로 변환 | `YY` |
+
+### Colab
+
+- 구글이 개발한 클라우드 기반의 jupyter notebook
+- 구글 드라이브 + GCP + jupyter
+- 초반 여러가지 모듈 설치의 장점을 가짐
+- 구글 드라이브 파일을 업로드하여 사용가능
+- VS Code와 연결해서 사용 가능
+- GPU 무료 사용 가능
