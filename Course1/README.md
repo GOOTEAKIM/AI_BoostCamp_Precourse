@@ -135,3 +135,30 @@
 
 - **Type 2- Data analysis + Deep learning**
   - Jupyter + colab
+
+## Day 3 : Anaconda 설치
+
+- 설치 링크 : https://www.anaconda.com/download/success
+- windows 최신 버전 (python 3.13)
+- 3.9.13이 되도록 변경
+- anaconda prompt에서 **conda init powershell** 실행
+- powershell에서 base가 자동 실행됨
+  - command로 방지
+      ```bash
+      conda config --set auto_activate_base false
+      ```
+  - 해결되었는지 확인
+
+      ```bash
+      conda config --show | findstr auto_activate
+      auto_activate: false 로 나오면 정상
+      ```
+
+- 3.9.13 버전으로 가상환경 만들기
+
+  ```bash
+  conda create -n py3913 python=3.9.13
+  conda activate py3913
+  python --version
+  ```
+
