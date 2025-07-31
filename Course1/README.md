@@ -505,3 +505,80 @@
   - 자기 자신을 호출하는 함수
   - 점화식과 같은 재귀적 수학 모형을 표현할 때 사용
   - 재귀 종료 조건 존재, 종료 조건까지 함수 호출 반복
+
+## Day 10 : Python data structure
+
+- python 기본 데이터 구조
+  - stack, queue
+  - tuple, set
+  - dictionary
+  - Collection 모듈
+
+- string
+  - 시퀀스 자료형으로 문자형 data를 메모리에 저장
+  - 영문자 한 글자는 1byte 메모리 공간 사용
+
+- stack
+  - 나중에 넣은 데이터를 먼저 반환하도록 설계된 메모리 구조
+  - 후입 선출 (LIFO)
+  - data 입력 == push == append()
+  - data 출력 == pop == pop()
+  - **리스트**로 구현
+
+- queue
+  - 먼저 넣은 데이터를 먼저 반환하도록 설계된 메모리 ㅣ구조
+  - 선입 선출 (FIFO)
+  - **리스트**로 구현
+  - put == append()
+  - get == pop(0)
+
+- tuple
+  - **값의 변경이 불가능한 리스트**
+  - () 사용
+  - 리스트의 연산, indexing, slicing 등 동일하게 사용
+  - 변경되지 않은 데이터의 저장
+  
+- set
+  - 값을 **순서없이 저장, 중복 불허**하는 자료형
+  - set 객체 선언을 이용하여 객체 생성
+  - 수학에서 활용하는 다양한 **집합 연산 가능**
+
+- dictionary
+  - 데이터를 저장할 때는 구분 지을 수 있는 값을함께 저장
+  - 구분을 위한 데이터 고유 값을 key 라고 함
+  - key 값을 활용하여 value 를 관리
+  - key, value를 매칭하여 key로 value 검색
+  - 다른 언어에서는 Hash Table 이라는 용어를 사용
+
+- collections
+  - list, tuple, dict에 대한 확장 자료 구조 모듈
+  - 편의성, 실행 효율 등을 제공
+    - deque
+    - Counter
+    - OrderedDict
+    - defaultdict
+    - namedtuple
+
+  - deque
+    - stack과 Queue를 지원
+    - list에 비해 효율적인, 빠른 자료 저장 방식 지원
+    - rotate, reverse 등 linked list의 특성 지원
+    - 기존 list 형태의 함수 모두 지원
+
+  - OrderedDict
+    - 데이터를 입력한 순서대로 dict 반환
+    - 3.6 버전 부터 입력한 순서를 보장하여 출력
+
+  - defaultdict 
+    - Dict type의 값에 기본 값을 지정, 신규값 생성시 사용
+
+  - Counter
+    - Sequence type의 data element들의 갯수를 dict 형태로 반환
+    - Dict type, keyword parameter 등도 모두 처리 가능
+    - set의 연산 지원
+
+  - namedtuple
+    - Tuple 형태로 **Data 구조체**를 저장
+    - 저장되는 data의 variable을 사전에 지정해서 저장
+
+
