@@ -581,4 +581,103 @@
     - Tuple 형태로 **Data 구조체**를 저장
     - 저장되는 data의 variable을 사전에 지정해서 저장
 
+## Day 11 : Pythonic code
+
+- 파이썬 스타일의 코딩 기법
+- **파이썬 특유의 문법**을 활용하여 효율적으로 코드 표현
+- 더 이상 파이썬 특유는 아님, 많은 언어들이 서로의 장점을 채용
+- 고급 코드를 작성 할 수록 더 많이 필요해짐
+
+- split & join
+- list comprehension
+- enumerate & zip
+- lambda & map & reduce
+- generator
+- asterisk
+
+### Split & Join
+
+- split
+  - string type의 값을 기준값으로 나눠서 list 형태로 변환
+
+- join
+  - string 으로 구성된 list를 합쳐서 하나의 string 으로 변환
+
+### list comprehension
+
+- 기존 list 사용하여 간단히 다른 list를 만드는 방법
+- 포괄적인 list, 포함되는 리스트라는 의미로 사용됨
+- 파이썬에서 가장 많이 사용되는 기법 중 하나
+- for + append 보다 속도가 빠름
+
+### enumerate & zip
+
+- enumerate : list의 element를 추출할 때 번호를 붙여서 추출
+- zip : 두 개의 list의 값을 병렬적으로 추출
+
+### lambda & map & reduce
+
+- lambda
+  - 함수 이름 없이, 함수처럼 쓸 수 있는 익명함수
+  - 수학의 람다 대수에서 유래
+
+- map
+  - 두 개 이상의 list에도 적용 가능, if fliter 도 사용가능
+
+- reduce
+  - list에 똑같은 함수를 적용해서 통합
+
+#### 3가지 다 간단하 코드로 다양한 기능 제공, 그러나 python3 에서 사용 권장하지는 않음
+
+### iterable object
+
+- Sequence형 자료형에서 데이터를 순서대로 추출하는 object
+- 내부적 구현으로 __iter__와 __next__가 사용됨
+- iter() 와 next() 함수로 iterable 객체를 iterator object로 상ㅇ
+
+### generator
+
+- iterable object를 특수한 형태로 사용해주는 함수
+- element가 사용되는 시점에 값을 메모리에 반환
+  - yield를 사용해 한번에 하나의 element만 반환함
+
+- list comprehension과 유사한 형태
+- generator 형태의 list 생성 == generator expression
+- [] 대신 () 를 사용하여 표현
+
+- list 타입의 데이터를 반환해주는 함수를 generator 로 제작
+- 큰 데이터를 처리할 때 사용
+- 파일 데이터를 처리할 때도 사용
+
+### function passing arguments
+
+1) keyword arguments
+2) default arguments
+3) variable length arguments
+
+- 함수에 입력되는 parameter의 변수명을 사용, arguments를 넘김
+- parameter의 기본 값을 사용, 입력하지 않을 경우 기본값 출력
+
+### variable length asterisk
+
+- 가변인자
+  - **개수가 정해지지 않은 변수**를 함수의 parameter로 사용하는 법
+  - keyword arguments와 함께, argument 추가가 가능
+  - Asterisk(*) 기호를 사용하여 함수의 parameter를 표시
+  - 입력된 값은 tuple type으로 사용 가능
+  - 가변인자는 오직 한개만 맨 마지막 parameter 위치에 사용가능
+  - 일반적으로 변수명을 *args 사용
+  - 기존 parameter 이후에 나오는 값을 tuple로 저장
+
+- 키워드 가변인자
+  - parameter 이름을 따로 지정하지 않고 입력하는 방법
+  - Asterisk 2개(**)를 사용하여 함수의 parameter를 표시
+  - 입력된 값은 **dict type**으로 사용 가능
+  - 가변인자는 오직 한 개만 기존 가변인자 다음에 사용
+
+- asterisk
+  - `*` 를 의미
+  - 단순 곱셈, 제곱 연산, 가변 인자 활용 등 사용
+  - tuple, dict 등 자료형에 있는 값 unpacking
+  - 함수의 입력값, zip 등에 유용하게 사용 가능
 
