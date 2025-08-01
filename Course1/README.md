@@ -681,3 +681,60 @@
   - tuple, dict 등 자료형에 있는 값 unpacking
   - 함수의 입력값, zip 등에 유용하게 사용 가능
 
+## Day 12 : OOP (객체 지향 프로그래밍 언어)
+
+- Object Oriented Programming
+- 객체 : 실생활에서 일종의 물건
+  - 속성 (Attribute) 와 행동 (Action) 을 가짐
+- OOP는 이러한 객체 개념을 프로그램으로 표현
+  - 속성 == 변수 (variable)
+  - 행동 == 함수 (method)
+
+- OOP 구성
+  - class
+  - instance (실제 구현체)
+
+#### python naming rule
+
+- 변수와 Class명 함수명 짓는 방식이 존재
+- snake_case : 띄어쓰기 부분 == '_'
+- CamelCase : 띄어쓰기 부분에 대문자 사용, Class명에 사용
+
+- Attribute 추가
+  - __init__, self 사용
+  - __init__ : **객체 초기화 예약 함수**
+
+    ```python
+    class SoccerPlayer(object) :
+        def __init__(self, name, position, back_number):
+
+            self.name= name
+            self.position = position
+            self.back_number = back_number
+    ```
+
+- method 구현하기
+  - self를 추가해야만 class 함수로 인정됨
+
+- objects(instance) 사용하기
+  - Object 이름 선언과 함께 초기값 입력
+
+### OOP 특성
+
+- Inheritance (상속)
+  - 부모 클래스부터 속성과 Method를 물려받은 자식 클래스를 생성
+- Polymorphism (다형성)
+  - 같은 이름 메소드의 **내부 로직을 다르게 작성**
+  - 같은 부모클래스의 상속에서 주로 발생
+- Visibility (가시성)
+  - 객체의 정보를 볼 수 있는 레벨을 조절
+  - **누구나 객체 안에 모든 변수를 볼 필요가 없음**
+    1) 객체를 사용하는 사용자가 임의로 정보 수정
+    2) 필요 없는 정보에는 접근할 필요가 없음
+    3) 만약 제품을 판매한다면? 소스의 보호
+
+#### Encapsulation
+
+- 캡슐화, 정보 은닉
+- Class를 설계할 때, 클래스 간 간섭 / 정보공유의 최소화
+
