@@ -847,8 +847,126 @@
 - 대표적인 데이터 저장 방식
 
 ### JSON
-`
+
 - JavaScript Object Notation
 - **JS의 데이터 객체 표현 방식**
 - 간결함
 - 데이터 용량이 적고, Code로 전환이 쉬움
+
+## Day 16 : Numerical Python - NumPy
+
+- Numericall Python
+- 파이썬의 **고성능 과학 계산용 패키지**
+- **Matrix와 Vector와 같은 Array 연산의 사실상의 표준**
+- list에 비해 빠르고, 메모리 효율적
+- 반복문 없이 뎅터 배열에 대한 처리를 지원
+- 선형대수와 관련된 다양한 기능을 제공
+- C, C++, 포트란 등의 언어와 통합 가능
+
+- NumPy 설치
+
+  ```bash
+  activate ml # 가상환경 생성
+  conda install numpy
+  ```
+
+- NumPy 호출
+
+  ```python
+  import numpy as np
+  ```
+
+#### 개발 환경
+
+- Anaconda  prompt로 이동
+
+  ```bash
+  conda create -n boost_numpy python=3.9.13
+  conda activate boost_numpy
+  conda install numpy
+  ```
+
+- VS Code에서 ctrl + shift + P 로 파이썬 인터프리터 선택
+- boost_numpy로 선택
+
+- Array shape
+  - array의 RANK에 따라 불리는 이름이 있음
+    - scalar
+    - vector 
+    - matrix
+    - 3-tensor
+    - n-tensor
+
+- Array dtype
+  - ndarray의 single element가 가지는 data type
+  - 각 element가 차지하는 memory의 크기가 결정됨
+  - C의 data type과 compatible
+
+- Array nbytes
+  - ndarray object의 메모리 크기를 반환함
+
+### Handling shape
+  - reshape : Array의 shape를 변경, element의 개수는 동일
+  - flatten : 다차원 array를 1차원 array로 변환
+
+### indexing & slicing
+
+- indexing
+  - list와 달리 2차원 배열에서 [0,0] 표기법을 제공
+  - matrix 경우, 앞은 row, 뒤는 column을 의미
+
+- slicing
+  - list와 달리 행과 열 부분을 나눠서 slicing 가능
+  - matrix의 부분 집합을 추출할 때 유용
+
+### creation function
+
+- arange
+  - array 범위를 지정하여, 값의 list를 생성하는 명령어
+
+- identity
+  - 단위 행렬 (대각 행렬) 생성
+
+- eye
+  - 대각선이 1인 행렬, k값의 시작 index의 변경 가능
+
+### operation functions
+
+- sum
+  - ndarray의 element들 간의 합을 구함, list의 sum 기능과 동일
+- axis
+  - 모든 operation function을 실행할 때 기준이 되는 dimension축
+- mean & std
+  - ndarry의 element들 간의 평균 또는 표준 편차를 반환
+- concatenate
+  - NumPy array를 합치는 함수
+
+### array operations
+
+- array 간 기본적인 사칙 연산을 지원한다 (+,-,*,/, //,**)
+  - array 간 shape가 같을 때 연산이 일어난다
+
+- broadcasting
+  - shape이 다른 배열 간 연산을 지원하는 기능
+    - scalar : vector 외에도 vector-matrix 간 연산도 지원
+
+### comparisions
+
+- All & Any
+  - Array의 데이터 전부(and) 또는 일부(or)가 조건에 만족 여부 반환
+
+- NumPy는 배열의 크기가 동일할 때 element간 비교의 결과를 boolean으로 반환
+
+- argmax & argmin
+  - array 내 최댓값 또는 최솟값의 index를 반환
+
+### boolean & fancy index
+
+- boolean index
+  - 특정 조건에 따른 값을 배열 형태로 추출
+  - Comparision operation 함수들도 모두 사용 가능
+
+### NumPy data i/o
+
+- loadtxt & savetxt
+  - text type의 데이터를 읽고, 저장하는 기능
