@@ -970,3 +970,60 @@
 
 - loadtxt & savetxt
   - text type의 데이터를 읽고, 저장하는 기능
+
+## Day 17 : Pandas 1
+
+- 구조화된 데이터의 처리를 지원하는 Python 라이브러리
+- panel data -> pandas
+- NumPy와 통합하여 강력한 스프레드시트 처리 기능 제공
+- indexing, 연산용 함수, 전처리 함수 등을 제공
+- 데이터 처리 및 통계 분석을 위해 사용
+
+#### 개발 환경
+
+```bash
+conda create -n ml python=3.9.13
+conda activate ml
+conda install pandas
+```
+
+- pandas의 구성
+  - Series : 
+    - DataFrame 중 하나의 Column에 해당하는 데이터의 모음 Object
+    - column vector를 표현하는 object
+  - DataFrame : 
+    - DataTable 전체를 포함하는 Object
+    - Series 를 모아서 만든 Data Table = 기본 2차원
+      - loc : index location, index 이름
+      - iloc : index position, index number
+
+### lambda, map, apply
+
+- map
+  - pandas의 series type의 데이터에도 map 함수 사용가능
+  - function 대신 dict, sequence형 자료 등으로 대체 가능
+
+    - replace
+      - 데이터 변환 기능 담당
+      - 데이터 변환시 많이 사용
+    - apply
+      - series 전체(column)에 함수 적용
+      - 입력 값이 series 데이터로 입력 받아 handling 가능
+      - 내장 연산 함수를 사용할 때도 똑같은 효과 거둘 수 있음
+      - mean, std 등 사용 가능
+      - scalar 값 이외에 series 값의 반환도 가능
+
+### pandas built in functions
+
+- describe
+  - Numeric type 데이터의 요약 정보를 보여줌
+- unique
+  - series data의 유일한 값을 list로 반환
+- sum 
+  - 기본적인 column, row 값의 연산을 지원
+  - sub, mean, min, max, count, median, mad,var등
+- isnull
+  - column 또는 row값의 NaN(null) 값의 index를 반환
+- sort_values
+  - column 값을 기준으로 데이터를 sorting
+
