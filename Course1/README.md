@@ -1027,3 +1027,51 @@ conda install pandas
 - sort_values
   - column 값을 기준으로 데이터를 sorting
 
+## Day 18 : Pandas 2
+
+### Groupby
+
+- SQL groupby 명령어와 같음
+- split -> apply -> combine
+- 과정을 거쳐 연산함
+- 한 개 이상의 column을 묶을 수 있음
+- Groupby 명령의 결과물도 결국은 dataframe
+
+### Hierarchical index
+
+- 두 개의 column으로 groupby를 할 경우, index가 2개 생성
+- Group으로 묶여진 데이터를 matrix 형태로 전환
+- Index level을 변경할 수 있음
+- Index level을 기준으로 기본 연산 수행 가능
+
+### grouped
+
+- Groupby에 의해 Split된 상태를 추출 가능함
+- 특정 key값을 가진 그룹의 정보만 추출 가능
+- 추출된 group 정보에는 세가지 유형의 apply가 가능
+- Aggregation : 요약된 통계정보를 추출해 줌
+- Transformation : 해당 정보를 변환해줌
+- Filtration : 특정 정보를 제거하여 보여주는 필터링 기능
+
+### Pivot table Crosstab
+
+- Index 축은 groupby와 동일
+- Column에 추가로 labeling 값을 추가하여, Value에 numeric type 값을 aggregation 하는 형태
+- 두 칼럼에 교차 빈도, 비율, 덧셈 등을 구할 때 사용
+- Pivot table의 특수한 형태
+- User-Item Rating Matrix 등을 만들 때 사용가능함
+
+### Merge & Concat
+
+- merge
+  - SQL에서 사용하는 Merge와 같은 기능
+  - 두 개의 데이터를 하나로 합침
+
+- join
+  - inner join
+  - full join
+  - left join
+  - right join
+
+- concat
+  - 같은 형태의 데이터를 붙이는 연산작업
