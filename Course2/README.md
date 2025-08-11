@@ -128,3 +128,36 @@
 - 사용자가 직접 미분 수식을 써야한느 부담
   - > 쓸 일은 없으나 순서를 이해할 필요는 있음
 
+## Day 5 : PyTorch Dataset
+
+- 모델에 데이터를 먹이는 방법
+
+### Dataset 클래스
+
+- 데이터 입력 형태를 정의하는 클래스
+- 데이터를 입력하는 방식의 표준화
+- Image, Text, Audio 등에 따른 다른 입력 정의
+
+#### Dataset 클래스 생성시 유의점
+
+- 데이터 형태에 따라 각 함수를 다르게 정의
+- 모든 것을 데이터 생성 시점에 처리할 필요는 없음
+  - > image의 Tensor 변화는 학습에 필요한 시점에 변환
+- 데이터 셋에 대한 표준화된 처리방법 제공 필요
+  - > 후속 연구자 또는 동료에게는 빛과 같은 존재
+- 최근에는 HuggingFace 등 표준화된 라이브러리 사용
+
+### DataLoader 클래스
+
+- Data의 Batch를 생성해주는 클래스
+- 학습직전 (GPU feed전) 데이터의 변환을 책임
+- Tensor로 변환 + Batch 처리가 메인 업무
+- 병렬적인 데이터 전처리 코드의 고민 필요
+
+  ```python
+  DataLoader(dataset, batch_size=1, shuffle=False, sampler=None,
+      batch_sampler=None, num_workers=0, collate_fn=None,
+      pin_memory=False, drop_last=False, timeout=0,
+      worker_init_fn=None, *, prefetch_factor=2,
+      persistent_workers=False)
+  ```
