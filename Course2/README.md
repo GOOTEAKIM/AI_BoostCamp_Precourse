@@ -82,3 +82,49 @@
 
 - 추천 템플릿 : https://github.com/victoresque/pytorch-template
 
+## Day 4 : AutoGrad & Optimizer
+
+### torch.nn.Module
+
+- 딥러닝을 구성하는 Layer의 base class
+- Input, Output, Forward, Backword 정의
+- 학습의 대상이 되는 parameter (tensor) 정의
+
+### nn.Parameter
+
+- Tensor 객체의 상속 객체
+- nn.Module 내에 attribute가 될 때는 required_grad = True 로 지정되어 학습 대상이 되는 Tensor
+- 우리가 직접 지정할 일은 잘 없다
+  - > 대부분 layer에는 weights 값들이 지정되어 있음
+
+### Backword
+
+- Layer에 있는 Parameter들의 미분 수행
+- Forward 의 결과값 (model의 output=예측지) 과 실제값 간의 차이(loss)에 대해 미분을 수행
+- 해당 값으로 Parameter 업데이트
+
+  ```python
+  for epoch in range(epochs):
+
+    # 이전 기록된 gradient를 0으로 초기화
+    optimizer.zero_grad()
+
+    # model을 통해 input forward propagation 진행
+    outputs = model(inputs)
+
+    # loss 값 계산
+    loss = criterion(outputs, labels)
+    print(loss)
+
+    # 모든 파라미터에 대해 gradient 계산
+    loss.backward()
+
+    # 파라미터 업데이트
+    optimizer.step()
+  ```
+
+- 실제 backward는 Module 단계에서 직접 지정가능
+- Module에서 backward와 optimizer 오버라이딩
+- 사용자가 직접 미분 수식을 써야한느 부담
+  - > 쓸 일은 없으나 순서를 이해할 필요는 있음
+
