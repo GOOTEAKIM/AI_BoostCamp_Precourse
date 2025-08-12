@@ -161,3 +161,30 @@
       worker_init_fn=None, *, prefetch_factor=2,
       persistent_workers=False)
   ```
+
+## Day 6 : 모델 불러오기
+
+### model.save()
+
+- 학습의 결과를 저장하기 위한 함수
+- 모델 형태 (architecture) 와 파라미터를 저장
+- 모델 학습 중간 과정의 저장을 통해 최선의 결과 모델을 선택
+- 만들어진 모델을 외부 연구자와 공유하여 학습 재연성 향상
+
+### checkpoints
+
+- 학습의 중간 결과를 저장하여 최선의 결과를 선택
+- earlystopping 기법 사용시 이전 학습의 결과물을 저장
+- loss와 metric 값을 지속적으로 확인 저장
+- 일반적으로 epoch, loss, metric을 함께 저장하여 확인
+- colab에서 지속적인 학습을 위해 필요
+
+### Transfer learning (전이학습)
+
+- 다른 데이터셋으로 만든 모델을 현재 데이터에 적용
+- 일반적으로 대용량데이터셋으로 만들어진 모델의 성능 증가
+- 현재 DL 에서는 가장 일반적인 학습 기법
+- backbone architecture 가 잘 학습된 모델에서 일부분만 변경하여 학습을 수행
+
+
+
