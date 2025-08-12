@@ -186,5 +186,57 @@
 - 현재 DL 에서는 가장 일반적인 학습 기법
 - backbone architecture 가 잘 학습된 모델에서 일부분만 변경하여 학습을 수행
 
+## Day 7 : monitoring tools
 
+### Tensorboard
 
+- TensorFlow의 프로젝트로 만들어진 시각화 도구
+- 학습 그래프, metric, 학습 결과의 시각화 지원
+- PyTorch도 연결 가능 -> DL 시각화 핵심 도구
+ 
+- scalar : metric 등 상수 값의 연속(epoch)을 표시
+- graph : 모델의 computational graph 표시
+- histogram : weight 등 값의 분포를 표현
+- Image : 예측 값과 실제 값을 비교 표시
+- mesh : 3d 형태의 데이터를 표현하는 도구
+
+  ```python
+  import os
+  import torch
+  from tensorboard import notebook
+
+  from torch.utils.tensorboard import SummaryWriter # 기록 생성 객체 SummaryWriter 생성 
+  import numpy as np
+
+  # 로그를 저장할 기본 디렉토리를 설정합니다.
+  logs_base_dir = "logs"
+  os.makedirs(logs_base_dir, exist_ok=True) # Tensorboard 기록을 위한 directory 생성
+
+  writer = SummaryWriter(exp)
+
+  # 임의의 손실 및 정확도 값을 로그에 기록합니다.
+  for n_iter in range(100):
+      writer.add_scalar('Loss/train', np.random.random(), n_iter)
+      writer.add_scalar('Loss/test', np.random.random(), n_iter)
+      writer.add_scalar('Accuracy/train', np.random.random(), n_iter)
+      writer.add_scalar('Accuracy/test', np.random.random(), n_iter)
+  writer.flush() # 값 기록(disk에 쓰기)
+
+  """
+  add_scalar 함수 :scalar 값을 기록
+  Loss / train : loss category에 train값
+  n_iter : x축의 값
+  """
+  ```
+
+#### 개발환경 설정
+
+  ```bash
+  conda install -c conda-forge tensorboard
+  ```
+
+### weight & biases
+
+- 머신러닝 실험을 원활히 지원하기 위한 상용도구
+- 협업, code versioning, 실험 겨과 기록 등 제공
+- MLOps의 대표젹인 툴로 저변 확대 중
