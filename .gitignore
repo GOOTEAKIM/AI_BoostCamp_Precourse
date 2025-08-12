@@ -1,5 +1,7 @@
 # TensorBoard logs
 logs/
+app/
+data/
 
 # Jupyter notebook checkpoints
 .ipynb_checkpoints/
