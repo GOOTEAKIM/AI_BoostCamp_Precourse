@@ -240,3 +240,105 @@
 - 머신러닝 실험을 원활히 지원하기 위한 상용도구
 - 협업, code versioning, 실험 겨과 기록 등 제공
 - MLOps의 대표젹인 툴로 저변 확대 중
+
+## Day 8 : Multi GPU 학습
+
+### 개념정리
+
+- Single vs Multi
+- GPU vs Node
+- Single Node Single GPU
+- Single Node Multi GPU
+- Multi Node Multi GPU
+
+### Model parallel
+
+- 다중 GPU에 학습을 분산하는 두가지 방법
+  - 모델 나누기 / 데이터 나누기
+- 모델을 나누는 것은 생각보다 예전에 썼음
+- 모델의 병목, 파이프라인의 어려움으로 인해 모델 병렬화는 고난이도 과제
+
+  ```python
+  class ModelParallelResNet50(ResNet):
+      def __init__(self, *args, **kwargs):
+          super(ModelParallelResNet50,self).__init_(
+              Bottleneck, [3, 4, 6, 3], num_classes=num_classes, *args, **kwargs)
+          
+          self.seq1 = nn.Sequential(
+              self.conv1, self.bn1, self.relu, self.maxpool, self.layer1, self.layer2).to('cuda:0') # 첫번째 모델을 cuda 0에 할당
+
+          self.seq2 = nn.Sequential(
+              self.layer3, self.layer4, self.avgpool,).to('cuda:1') # 두번째 모델을 cuda 1에 할당 
+
+          self.fc.to('cuda:1')
+
+      def forward(self, x): 
+          x = self.seq2(self.seq1(x).to('cuda:1')) # 두 모델을 연결
+          return self.fc(x.view(x.size(0), -1))
+  ```
+
+### Data parallel
+
+- 데이터를 나눠 GPU에 할당 후 결과의 평균을 취하는 방법
+- minibatch 수식과 유사한데 한번에 여러 GPU에서 수행
+- PyTorch에서는 2가지 방식 제공
+  - DataParallel
+    ```python
+    parallel_model = torch.nn.DataParallel(model) # Encapsulate the model
+
+    predictions = parallel_model(inputs). # Forward pass on multi-GPUs
+    loss = loss_function(predictions, labels) # Compute loss function
+    loss.mean().backward() # Average GPU-losses +backward pass
+    optimizer.step() # Optimizer step
+    predictions = parallel_model(inputs) # Forward pass with new parameters
+    ```
+
+    - 단순히 데이터를 분배한 후 평균을 취한다
+    - > GPU 사용 불균형 문제 발생, Batch 사이즈 감소 (한 GPU가 벼목), GIL
+
+
+
+  - DistributedDataParallel
+    - 각 CPU 마다 process 생성하여 개별 GPU에 할당
+    - > 기본적으로 DataParallel로 하나 개별적으로 연산의 평균을 냄
+
+      ```python
+      train_sampler = torch.utils.data.distributed.DistributedSampler(train_data) # 샘플러 사용
+      shuffle = False
+      pin_memory = True
+
+      trainloader = torch.utils.data.DataLoader(train_data, batch_size=20, shuffle=True, pin_memory=pin_memory, num_workers=3, shuffle=shuffle, sampler=train_sampler)
+      ```
+
+      ```python
+      from multiprocessing import Pool 
+
+      def f(x): # Python의 멀티프로세싱 코드
+          return x*x
+
+      if __name__ == '__main ':
+          with Pool(5) as p:
+          print(p.map(f, [1, 2, 3]))
+      ```
+
+      ```python
+      def main():
+          n_gpus = torch.cuda.device_count()
+          torch.multiprocessing.spawn(main_worker, nprocs=n_gpus, args=(n_gpus, ))
+
+      def main_worker(gpu, n_gpus):
+          image_size = 224
+          batch_size = 512
+          num_worker = 8
+          epochs = ...
+
+          batch_size = int(batch_size / n_gpus)
+          num_worker = int(num_worker / n_gpus)
+          torch.distributed.init_process_group(
+          backend='nccl’, init_method='tcp://127.0.0.1:2568’, world_size=n_gpus, rank=gpu) # 멀티프로세싱 통신 규약 정의
+
+          model = MODEL
+          torch.cuda.set_device(gpu)
+          model = model.cuda(gpu)
+          model = torch.nn.parallel.DistributedDataParallel(model, device_ids=[gpu]) # Distributed DataParallel 정의
+      ```
