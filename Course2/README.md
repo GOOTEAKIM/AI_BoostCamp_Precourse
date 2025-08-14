@@ -342,3 +342,47 @@
           model = model.cuda(gpu)
           model = torch.nn.parallel.DistributedDataParallel(model, device_ids=[gpu]) # Distributed DataParallel 정의
       ```
+
+## Day 9 : Hyperparameter Tuning
+
+### Hyperparameter Tuning
+
+- 모델 스스로 학습하지 않는 값은 사람이 지정 (learning rate, 모델의 크기, optimizer 등)
+- 하이퍼 파라미터에 의해서 값이 크게 좌우될 때도 있다 (요즘은 그닥)
+- 마지막 0.01을 쥐어짜야 할 때 도전해볼만하다
+- 가장 기본적인 방법 - grid vs random
+- 최근에는 베이지안 기반 기법들이 주도
+- 필수적으론 요구되지 않는다
+- 좋은 데이터를 모으는 것이 더 중요하다
+
+### Ray
+
+- multi-node multi processing 지원 모듈
+- ML / DL의 병렬 처리를 위해 개발된 몯ㄹ
+- 기본적으로 현재의 분산병렬 ML / DL 모듈의 표준
+- Hyperparameter Search를 위한 다양한 모듈 제공
+
+  ```python
+  data_dir = os.path.abspath("./data")
+
+  load_data(data_dir)
+
+  config = { # config에 search space 지ㅓㅇ
+      "l1": tune.sample_from(lambda _: 2 ** np.random.randint(2, 9)),
+      "l2": tune.sample_from(lambda _: 2 ** np.random.randint(2, 9)),
+      "lr": tune.loguniform(1e-4, 1e-1),
+      "batch_size": tune.choice([2, 4, 8, 16])
+  }
+
+  # 학습 스케줄링 알고리즘 지정
+  scheduler = ASHAScheduler(metric="loss", mode="min",  max_t=max_num_epochs, grace_period=1, reduction_factor=2)
+
+  reporter = CLIReporter(metric_columns=["loss", "accuracy", "training_iteration"])
+
+  # 결과 출력 양식 지정
+  result = tune.run(partial(train_cifar, data_dir=data_dir),
+      resources_per_trial={"cpu": 2, "gpu": gpus_per_trial},
+      config=config, num_samples=num_samples,
+      scheduler=scheduler,
+      progress_reporter=reporter)
+  ```
